@@ -1,6 +1,9 @@
 <script>
     import { onMount } from "svelte";
 
+    // Render backend URL
+    const API_URL = "https://fraudgaurd-5.onrender.com";
+
     let name = "";
     let email = "";
     let deviceId = "";
@@ -21,7 +24,7 @@
     async function loadDashboard() {
         try {
             const statsResponse = await fetch(
-                "http://localhost:5000/api/admin/stats"
+                `${API_URL}/api/admin/stats`
             );
 
             const statsData = await statsResponse.json();
@@ -31,7 +34,7 @@
             }
 
             const usersResponse = await fetch(
-                "http://localhost:5000/api/admin/users"
+                `${API_URL}/api/admin/users`
             );
 
             const usersData = await usersResponse.json();
@@ -40,7 +43,7 @@
                 users = usersData.users;
             }
         } catch (err) {
-            console.error(err);
+            console.error("Dashboard error:", err);
         }
     }
 
@@ -57,7 +60,7 @@
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/signup",
+                `${API_URL}/api/signup`,
                 {
                     method: "POST",
                     headers: {
@@ -87,7 +90,7 @@
             await loadDashboard();
 
         } catch (err) {
-            console.error(err);
+            console.error("Signup error:", err);
             error = "Unable to connect to the backend server.";
         } finally {
             submitting = false;
@@ -99,6 +102,7 @@
 
 <svelte:head>
     <title>Multi-Account Fraud Detection</title>
+
     <meta
         name="description"
         content="Multi-Account Abuse Detection and Fraudulent Signup Prevention System"
