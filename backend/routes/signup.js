@@ -1,5 +1,7 @@
 const express = require("express");
-const User = require("../models/User");
+
+const User = require("../models/user");
+
 const calculateRisk = require("../services/fraudDetection");
 
 const router = express.Router();
@@ -61,7 +63,6 @@ router.post("/signup", async (req, res) => {
             deviceId: deviceId ? deviceId.trim() : null,
             ipAddress,
             userAgent,
-
             riskScore: fraudResult.riskScore,
             riskLevel: fraudResult.riskLevel,
             action: fraudResult.action,
