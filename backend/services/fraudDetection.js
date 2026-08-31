@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/user");
 
 async function calculateRisk({ ipAddress, deviceId }) {
     let riskScore = 0;
